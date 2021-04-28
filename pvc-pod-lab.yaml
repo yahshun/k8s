@@ -1,0 +1,16 @@
+apiVersion: 1
+kind: Pod
+metadata:
+  name: pvc-pod
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command: ['sh', '-c', 'while true; do echo Success >> /output/output.txt; sleep 5; done']
+    volumeMount:
+    - name: my-pv
+      mountPath: /output
+  volumes:
+  - name: my-pv
+    peristentVolumeClaim:
+      claimName: lab-pvc
